@@ -1,5 +1,6 @@
 import os
 os.environ["TESTING"] = "1"
+os.environ["DATABASE_URL"] = "postgresql+psycopg://postgres:postgres@localhost:5432/fastapi_db"
 
 import sys
 import pytest
@@ -28,7 +29,7 @@ test_app.include_router(users.router)
 async def root():
     return {"message": "Hello World"}
 
-@pytest.fixture(scope="session")
+@pytest.fixture
 async def client():
     async with AsyncClient(transport=ASGITransport(app=test_app), base_url="http://test") as c:
         yield c
