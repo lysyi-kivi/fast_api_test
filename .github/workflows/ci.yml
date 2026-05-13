@@ -46,6 +46,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+       - name: Debug env
+        run: |
+          echo "DATABASE_URL=$DATABASE_URL"
+          
       - name: Run migrations
         run: alembic upgrade head
         env:
