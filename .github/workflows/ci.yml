@@ -52,4 +52,5 @@ jobs:
       - name: Run migrations
         run: alembic upgrade head
 
-      - name: Ru
+      - name: Run tests
+        run:  pytests -v 
