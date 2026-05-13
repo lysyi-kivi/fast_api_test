@@ -1,3 +1,4 @@
+import os
 from logging.config import fileConfig
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlalchemy import pool
@@ -8,6 +9,11 @@ from database import Base
 import models
 
 config = context.config
+
+# Берём URL из переменной окружения если есть
+if os.getenv("DATABASE_URL"):
+    config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
+
 fileConfig(config.config_file_name)
 target_metadata = Base.metadata
 
