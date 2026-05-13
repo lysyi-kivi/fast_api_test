@@ -46,13 +46,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-       - name: Debug env
-        run: |
-          echo "DATABASE_URL=$DATABASE_URL"
-          
+      - name: Debug env
+        run: echo "DATABASE_URL=$DATABASE_URL"
+
       - name: Run migrations
         run: alembic upgrade head
-        env:
-          DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/fastapi_db
-      - name: Run tests
-        run: pytest -v
+
+      - name: Ru
