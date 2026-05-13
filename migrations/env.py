@@ -27,8 +27,11 @@ def run_migrations_offline():
         context.run_migrations()
 
 async def run_migrations_online():
+    # Берём URL напрямую из config который уже обновлён
+    url = config.get_main_option("sqlalchemy.url")
+    
     connectable = async_engine_from_config(
-        config.get_section(config.config_ini_section),
+        {"sqlalchemy.url": url},
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
